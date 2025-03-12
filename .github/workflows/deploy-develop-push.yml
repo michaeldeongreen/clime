@@ -1,0 +1,32 @@
+############################################################################################################
+# Name: deploy-develop-push.yml
+# Description: Main Github actions workflow that runs a linux-x64 .net cli tool.
+# Trigger:
+#   - On push to develop and feature branches
+############################################################################################################
+on:
+  push:
+    branches:
+      - develop
+      - feature/*
+
+# variables
+env:
+  dotnet_version: '8.0.x'
+
+# workflow
+name: Deploy Fabric Items
+
+# jobs
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout repository 
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      # Run deployment cli tool
+      - name: Run deployment cli tool
+        uses: ./.github/actions/action-run-deployment-cli-tool
+        with:
+          dotnet_version: ${{ env.dotnet_version }}

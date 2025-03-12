@@ -1,0 +1,31 @@
+#######################################################################################
+# Name: action-run-deployment-cli-tool.yml
+# Description: Composite action that runs the linux-x64 .net cli tool.
+#######################################################################################
+
+name: 'action-run-deployment-cli-tool'
+description: |
+  Composite action that runs the deployment cli tool.
+inputs:
+  # dotnet version
+  dotnet_version:
+    description: 'Dotnet version to use'
+    required: true
+    type: string
+
+runs:
+  using: 'composite'
+  steps:
+    # Setup dotnet
+    - name: Setup dotnet ${{ inputs.dotnet_version }}
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ inputs.dotnet_version }}
+    # Call the deployment cli tool
+    - name: Display dotnet version
+      shell: bash
+      working-directory: v1/
+      run: |
+        dotnet --version
+        chmod +x ./clistub
+        ./clistub -name Microsoft -age 50
