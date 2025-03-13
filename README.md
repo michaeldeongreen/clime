@@ -2,6 +2,14 @@
 
 The clime repository demonstrates how to call a .net console application using GitHub Action workflows and composite actions.  Composite actions were used to demonstrate how to run the clistub tool in a step.  The composite action can be easily converted to a GitHub workflow and ran as a job.  See the official GitHub documentation on workflows and composite actions [here](https://docs.github.com/en/actions/sharing-automations/avoiding-duplication).
 
+## Prerequisites
+- Microsoft Entra ID app (documentation [here](https://learn.microsoft.com/en-us/rest/api/fabric/articles/get-started/create-entra-app))
+- Create GitHub repository secrets (info [here](#github-repository-environments) and [here](#github-repository-secrets))
+
+###
+At this time, you must grant *Contributor* access to all Microsoft Fabric Workspaces in which the Microsoft Entra ID app will access (more infor [here](https://stackoverflow.com/a/78230630)).
+- For relevant Fabric Grant Contributor Access to Microsoft Entra ID app
+
 ## Workflows
 
 ### deploy-develop-push.yml
@@ -23,3 +31,12 @@ clistub is a very basic/stub ```.net 8``` application that accepts two parameter
 ### clistub Parameters
 - name - A name.
 - age - An age.
+
+## GitHub Repository Environments
+- development
+- production
+
+### GitHub Repository Secrets
+- SERVICE_PRINCIPAL_AUTH_TENANT_ID
+- SERVICE_PRINCIPAL_AUTH_CLIENT_ID
+- SERVICE_PRINCIPAL_AUTH_CLIENT_SECRET
