@@ -1,5 +1,5 @@
 ############################################################################################################
-# Name: deploy-develop-push.yml
+# Name:        deploy-develop-push.yml
 # Description: Main Github actions workflow that runs a linux-x64 .net cli tool.
 # Trigger:
 #   - On push to develop and feature branches
@@ -21,6 +21,12 @@ name: Deploy Fabric Items
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: development
+    # Environment variables for the deployment cli tool
+    env:
+      SERVICE_PRINCIPAL_AUTH_TENANT_ID: ${{ secrets.SERVICE_PRINCIPAL_AUTH_TENANT_ID }}
+      SERVICE_PRINCIPAL_AUTH_CLIENT_ID: ${{ secrets.SERVICE_PRINCIPAL_AUTH_CLIENT_ID }}
+      SERVICE_PRINCIPAL_AUTH_CLIENT_SECRET: ${{ secrets.SERVICE_PRINCIPAL_AUTH_CLIENT_SECRET }}
     steps:
       # Checkout repository 
       - name: Checkout repository

@@ -1,5 +1,5 @@
 #######################################################################################
-# Name: action-run-deployment-cli-tool.yml
+# Name:        action-run-deployment-cli-tool.yml
 # Description: Composite action that runs the linux-x64 .net cli tool.
 #######################################################################################
 
@@ -26,6 +26,9 @@ runs:
       shell: bash
       working-directory: v1/
       run: |
+        echo "SERVICE_PRINCIPAL_AUTH_TENANT_ID: $SERVICE_PRINCIPAL_AUTH_TENANT_ID"
+        echo "SERVICE_PRINCIPAL_AUTH_CLIENT_ID: $SERVICE_PRINCIPAL_AUTH_CLIENT_ID"
+        echo "SERVICE_PRINCIPAL_AUTH_CLIENT_SECRET: $SERVICE_PRINCIPAL_AUTH_CLIENT_SECRET"
         dotnet --version
         chmod +x ./clistub
         ./clistub -name Microsoft -age 50
